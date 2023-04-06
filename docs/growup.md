@@ -323,6 +323,34 @@ const validateRemark = (rule, value, callback) => {
 }
 ```
 
+## 饿了么动态表单
+
+数据格式
+
+> 注意点：
+>
+> 需要注意给prop绑定时的名称要保持一致（一级属性+索引+二级属性名称 **:prop="'soft_ware.' + index + '.price'"**）
+
+```html
+<el-form-item
+    label-width="250px"
+    v-for="(item, index) in ruleForm.soft_ware"
+    :key="index"
+    :label="item.ware_name + '原价:' + item.discount_price + '元'"
+    :prop="'soft_ware.' + index + '.price'"
+    :rules="RMB_Rules"
+>
+    折后
+    <el-input class="input_witdh" v-model="item.price" />
+    元
+</el-form-item>
+```
+
+```js
+const RMB_Rules = [{ required: true, trigger: ['change', 'blur'], validator: validate_three, message: '元输入框不能超过7位数' }]
+
+```
+
 
 
 
